@@ -7,7 +7,7 @@ description: 用 lark-cli 把本地「个人AI知识库」增量同步到已有�
 
 ## 定位
 
-[feishu-cli-knowledge-sync](../feishu-cli-knowledge-sync/SKILL.md) 做的是**一次性全量搬运**；这个 skill 做的是**同一个库的第 N 次同步**：每次只把新加的文档送上去，不重复导入、不覆盖用户在飞书上的编辑。
+[feishu-cli-knowledge-sync](../feishu-cli-knowledge-sync/飞书%20CLI%20知识库同步%20Skill.md) 做的是**一次性全量搬运**；这个 skill 做的是**同一个库的第 N 次同步**：每次只把新加的文档送上去，不重复导入、不覆盖用户在飞书上的编辑。
 
 ## 固定参数
 

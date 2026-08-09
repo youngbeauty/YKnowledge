@@ -1,0 +1,4 @@
+interface:
+  display_name: "YKnowledge 飞书增量同步"
+  short_description: "把个人AI知识库新增的 Markdown 增量同步到飞书 Wiki，跳过未变、改动只报告不覆盖"
+  default_prompt: "Use $yknowledge-feishu-sync to sync newly added docs from 个人AI知识库 into the Feishu Wiki."
