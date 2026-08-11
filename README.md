@@ -37,6 +37,10 @@ git clone https://github.com/youngbeauty/YKnowledge.git
 | `外网前沿科技AI文章摘录/` | 英文前沿文章的摘录与要点 |
 | `飞书 CLI/` | 飞书 CLI 的体验记录与知识库同步 skill |
 
+## 更新历史
+
+每次加了什么内容，都记在 [CHANGELOG.md](CHANGELOG.md)，最新的在最上面。
+
 ## 说明
 
 内容基于个人实测，写的时候有效，工具迭代快，跑不通很正常——把报错一起丢给 agent 让它帮你排。
