@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{{姓名}} — {{定位}}</title>
+<style>
+  /* ============================================================
+     设计规格逆向自一份爆款校招简历（PyMuPDF 逐 span 提取）：
+     - 西文/数字 Georgia 衬线 + 中文黑体(PingFang SC) 混排 ← 气质核心，勿改
+     - 分节标题 #2563EB 粗体 + 全宽 1.2px #3B82F6 细线
+     - 段落强调 #1E3A8A 粗体；链接 #2563EB 粗体下划线
+     - 公司行 #F3F4F6 灰带 + 日期右对齐
+     - 页边距 ~10.6mm；正文 11.5px / 行高 1.6；代码 Courier New 粗体
+     ============================================================ */
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --blue: #2563EB;
+    --blue-rule: #3B82F6;
+    --navy: #1E3A8A;
+    --ink: #111;
+    --gray-band: #F3F4F6;
+    --todo-bg: #FFF3B8;
+    --todo-ink: #8a6d00;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", serif;
+    color: var(--ink);
+    font-size: 11.5px;
+    line-height: 1.6;
+    background: #fff;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto;
+    padding: 9mm 10.6mm 8mm;
+    background: #fff;
+  }
+  b, strong { font-weight: 700; }
+  a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; font-weight: 700; }
+  code { font-family: "Courier New", Courier, monospace; font-size: 10.5px; font-weight: 700; }
+  h1 {
+    font-size: 22px; letter-spacing: 1px; margin-bottom: 2px;
+    font-family: "PingFang SC", "Hiragino Sans GB", sans-serif; font-weight: 700;
+  }
+  .hline { font-size: 11.5px; margin-bottom: 1px; }
+  .hline .ico { display: inline-block; width: 14px; text-align: center; margin-right: 2px; }
+  .hline .sep { color: #666; margin: 0 5px; }
+  h2 {
+    font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
+    font-size: 17px; color: var(--blue); font-weight: 700;
+    margin: 10px 0 0;
+  }
+  .rule { border: 0; border-top: 1.2px solid var(--blue-rule); margin: 2px 0 6px; }
+  .lead { color: var(--navy); font-weight: 700; margin-bottom: 5px; }
+  .org {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--gray-band); padding: 3px 8px; margin: 7px 0 4px;
+    border-radius: 2px;
+  }
+  .org .name { font-weight: 700; font-size: 12.5px; }
+  .org .name .tag { font-weight: 400; color: #444; font-size: 11px; }
+  .org .date { color: #333; font-size: 11px; white-space: nowrap; font-weight: 700; }
+  h3 { font-size: 12.5px; color: var(--navy); font-weight: 700; margin: 6px 0 2px; }
+  .role-line { margin-bottom: 3px; }
+  ul { list-style: none; }
+  li { padding-left: 14px; position: relative; margin-bottom: 2px; text-align: justify; }
+  li::before { content: "•"; position: absolute; left: 2px; top: 0; font-weight: 700; }
+  li.sub { padding-left: 28px; margin-bottom: 1px; }
+  li.sub::before { content: "◦"; left: 16px; }
+  .todo {
+    background: var(--todo-bg); color: var(--todo-ink);
+    border-radius: 2px; padding: 0 3px; font-size: 10px;
+    font-family: "PingFang SC", sans-serif; font-weight: 400;
+  }
+  @media print { .page { margin: 0; width: auto; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ============================================================
+组件用法（填内容时删掉本注释块）：
+
+【头部】h1 姓名 + 3-5 行 .hline 信号压缩行。
+  <h1>姓名</h1>
+  <div class="hline"><span class="ico">📞</span>电话 <span class="sep">|</span> <span class="ico">✉️</span>邮箱</div>
+  <div class="hline"><span class="ico">👤</span><b>年龄/定位句 · Open to opportunities</b></div>
+  <div class="hline"><span class="ico">🐙</span><a href="...">github.com/xxx</a>（身份标签）</div>
+  <div class="hline"><span class="ico">🎓</span>学校（限定词）专业 | 年份</div>
+
+【分节】h2 标题后必须紧跟 <hr class="rule">：
+  <h2>工作经历</h2>
+  <hr class="rule">
+
+【藏蓝强调段】分节下的社会证明/总述段（可选，每节最多一段）：
+  <div class="lead">…荣誉、榜单、总述性强信号…</div>
+
+【公司灰带行】
+  <div class="org">
+    <span class="name">公司名 <span class="tag">— 职位｜一句话定位</span></span>
+    <span class="date">2025.6 – 至今</span>
+  </div>
+
+【项目藏蓝小标题】公司下多个项目时用：
+  <h3>项目名 ｜ 副标题（热词命名）</h3>
+
+【列表】一级 li，二级 li.sub。加粗策略：只加粗数字、热词、极值词。
+  行内代码/CLI 用 <code>。
+
+【待确认占位】信息缺口用黄色高亮，终稿前应全部消除：
+  <span class="todo">待确认：…</span>
+============================================================ -->
+
+{{内容}}
+
+</div>
+</body>
+</html>
