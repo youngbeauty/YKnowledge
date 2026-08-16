@@ -6,6 +6,17 @@
 
 ---
 
+## 2026-08-15
+
+**新增：dsh 接 VibeProxy 与思考强度**
+- `deespseek harness/05-接VibeProxy与思考强度.md` — macOS 上用 Claude / ChatGPT 订阅顶掉 API key 接进 dsh；解释「模型配好了却没有思考强度选项」的成因，怎么从代理里查出每个模型真实支持的档位，以及用实测验证这些档位不是摆设
+
+**新增：DeepSeek Harness 调研**
+- `deespseek harness/` — 它是什么、怎么用、改它能干嘛、社区实测与和 Claude Code / 其他 harness 的对比
+- `deespseek harness/官方文档/` — 从官方仓库拉下来的中文原文（Web 指南、配模型、Python SDK、CLI、架构、写插件），2026-08-15 快照
+
+---
+
 ## 2026-08-10
 
 **新增**

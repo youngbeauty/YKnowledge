@@ -36,6 +36,7 @@ git clone https://github.com/youngbeauty/YKnowledge.git
 | `我觉得好用的skills 分享/` | 按主题分类的 skill 推荐：AI 编程工作流、UI 动效、图片生成、知识管理、可视化等 |
 | `外网前沿科技AI文章摘录/` | 英文前沿文章的摘录与要点 |
 | `飞书 CLI/` | 飞书 CLI 的体验记录与知识库同步 skill |
+| `deespseek harness/` | DeepSeek Harness（dsh）是什么、怎么用、为什么改、社区实测，以及官方中文文档快照 |
 
 ## 更新历史
 
